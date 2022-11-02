@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ override: true });
 const TelegramBot = require('node-telegram-bot-api');
 const GitignoreController = require('./Controllers/GitignoreController');
 const UserController = require('./Controllers/UserController');
