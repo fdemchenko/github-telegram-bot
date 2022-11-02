@@ -17,8 +17,12 @@
   "dependencies": {
     "@napi-rs/canvas": "^0.1.30",
     "@octokit/request-error": "^3.0.2",
+    "dotenv": "^16.0.3",
     "node-telegram-bot-api": "^0.59.0",
-    "octokit": "^2.0.10"
+    "octokit": "^2.0.10",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.25.3"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^1.0.10",
