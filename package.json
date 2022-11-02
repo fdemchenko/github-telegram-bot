@@ -1,0 +1,28 @@
+{
+  "name": "github-bot",
+  "version": "1.0.0",
+  "description": "GitHub integration into Telegram",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/main.js"
+  },
+  "keywords": [
+    "GitHub",
+    "Bot",
+    "Telegram"
+  ],
+  "author": "Filipp Demchenko",
+  "license": "MIT",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.30",
+    "@octokit/request-error": "^3.0.2",
+    "node-telegram-bot-api": "^0.59.0",
+    "octokit": "^2.0.10"
+  },
+  "devDependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.10",
+    "node-pre-gyp": "0.12.0",
+    "nodemon": "^2.0.20"
+  }
+}
