@@ -35,7 +35,7 @@ module.exports =  class UserController {
         await User.create({ tg_user_id: userId, gh_username: requestedUsername });
       }
 
-      this.bot.sendMessage(chatId, 'You are logined as ' + requestedUsername);
+      this.bot.sendMessage(chatId, 'You are logged in as ' + requestedUsername);
     } catch (e) {
       if (e instanceof RequestError) {
         this.bot.sendMessage(chatId, 'This user doesn\'t exist!');
@@ -53,7 +53,7 @@ module.exports =  class UserController {
     try {
       const user = await User.findOne({ where: { tg_user_id: userId } });
       if (!user) {
-        this.bot.sendMessage(chatId, 'You are not logined');
+        this.bot.sendMessage(chatId, 'You are not logged in');
       } else {
         User.destroy({ where: { tg_user_id: userId  } });
         this.bot.sendMessage(chatId, 'Good bye!');
@@ -71,7 +71,7 @@ module.exports =  class UserController {
       const user = await User.findOne({ where: { tg_user_id: userId } });
       console.dir(user);
       if (!user) {
-        this.bot.sendMessage(chatId, 'You are not logined');
+        this.bot.sendMessage(chatId, 'You are not logged in');
       } else {
         this.bot.sendMessage(chatId, user['gh_username']);
       }
