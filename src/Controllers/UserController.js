@@ -21,9 +21,6 @@ module.exports =  class UserController {
         username: requestedUsername
       });
 
-      if (typeof userResponce.data === 'undefined') 
-        return this.bot.sendMessage(chatId, 'This user doesn\'t exist!');
-
       const user = await User.findOne({ where: { tg_user_id: userId } });
 
       if (user) {
@@ -69,7 +66,6 @@ module.exports =  class UserController {
 
     try {
       const user = await User.findOne({ where: { tg_user_id: userId } });
-      console.dir(user);
       if (!user) {
         this.bot.sendMessage(chatId, 'You are not logged in');
       } else {
