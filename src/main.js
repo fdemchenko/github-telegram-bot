@@ -24,7 +24,16 @@ const main = async () => {
 
 main();
 
+bot.onText(/\/start/, msg => {
+  const name = msg.from.first_name;
+  const chatId = msg.chat.id;
+
+  bot.sendMessage(chatId, 'Hello, ' + name + '!'); 
+});
+
 bot.onText(/\/gitignore (.+)/,  gitignoreController.getGitignore);
+
 bot.onText(/\/login (.+)/,  userController.login);
 bot.onText(/\/logout/,  userController.logout);
 bot.onText(/\/getme/,  userController.getMe);
+
