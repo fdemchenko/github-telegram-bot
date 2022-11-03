@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const octokit = require('../octokit');
 const { RequestError } = require('@octokit/request-error');
+const isAuthorized = require('../Utils/isAuthorized');
 
 module.exports =  class UserController {
   constructor(telegramBot) {
@@ -48,8 +49,8 @@ module.exports =  class UserController {
     const userId = msg.from.id;
 
     try {
-      const user = await User.findOne({ where: { tg_user_id: userId } });
-      if (!user) {
+      const githubUsername = await isAuthorized(userId);
+      if (!githubUsername) {
         this.bot.sendMessage(chatId, 'You are not logged in');
       } else {
         User.destroy({ where: { tg_user_id: userId  } });
@@ -65,11 +66,11 @@ module.exports =  class UserController {
     const userId = msg.from.id;
 
     try {
-      const user = await User.findOne({ where: { tg_user_id: userId } });
-      if (!user) {
+      const githubUsername = await isAuthorized(userId);
+      if (!githubUsername) {
         this.bot.sendMessage(chatId, 'You are not logged in');
       } else {
-        this.bot.sendMessage(chatId, user['gh_username']);
+        this.bot.sendMessage(chatId, githubUsername);
       }
     } catch (e) {
       console.log(e);
