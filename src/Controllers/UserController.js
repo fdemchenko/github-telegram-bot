@@ -2,6 +2,7 @@ const { User } = require('../models');
 const octokit = require('../octokit');
 const { RequestError } = require('@octokit/request-error');
 const isAuthorized = require('../Utils/isAuthorized');
+const UserImageService = require('../Services/UserImageService');       
 
 module.exports =  class UserController {
   constructor(telegramBot) {
@@ -10,6 +11,7 @@ module.exports =  class UserController {
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.getMe = this.getMe.bind(this);
+    this.myProfile = this.myProfile.bind(this);
   }
 
   async login(msg, match) {
@@ -73,6 +75,29 @@ module.exports =  class UserController {
         this.bot.sendMessage(chatId, githubUsername);
       }
     } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async myProfile(msg) {
+    const chatId = msg.chat.id;
+    const userId = msg.from.id;
+
+    try {
+      const githubUsername = await isAuthorized(userId);
+      if (!githubUsername) {
+        this.bot.sendMessage(chatId, 'You are not logged in');
+      } else {
+        // TODO
+        const imageBuffer = await UserImageService.generateUserImage(githubUsername);
+        this.bot.sendPhoto(chatId, imageBuffer);
+      }
+    } catch (e) {
+      if (e instanceof RequestError) {
+        this.bot.sendMessage(chatId, 'Network error');
+      } else {
+        this.bot.sendMessage(chatId, 'Internal error');
+      }
       console.log(e);
     }
   }

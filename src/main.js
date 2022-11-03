@@ -40,6 +40,7 @@ bot.onText(/\/gitignore (.+)/,  gitignoreController.getGitignore);
 bot.onText(/\/login (.+)/,  userController.login);
 bot.onText(/\/logout/,  userController.logout);
 bot.onText(/\/getme/,  userController.getMe);
+bot.onText(/\/myprofile/,  userController.myProfile);
 
 bot.onText(/\/myrepos/, reposController.myRepos);
 
